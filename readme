@@ -1,0 +1,22 @@
+The program is divided into two different sides, the server side
+and the client side. The server maintains a linked list data structure
+of bank accounts. It starts off with a main thread
+that spawns off two different threads, the periodic action cycle and
+the session acceptor thread. The periodic action thread sleeps for
+twenty seconds and then prints out all of the information held
+by the data structure. The session acceptor thread opens a TCP
+socket and waits for clients to attempt to connect to the socket.
+When a connection attempt is made this thread spawns a client session
+thread. The client session thread reads the buffer sent from the
+client which contains the client's command request. It proccesses and
+executes the request from the client. 
+
+The client side has two threads as well. The first is main which attempts
+to connect to the server. If it fails, it waits 3 seconds and attempts to
+connect again. Once the connection is established the client may send
+operation requests to the server over the TCP socket that they connected
+to. The second thread is the read thread that simply reads the responses
+that the bank returns after sending a request. This allows the client to
+confirm that the bank has read the request correctly and the request has
+either been applied or denied. 
+
